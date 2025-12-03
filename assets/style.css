@@ -1,0 +1,570 @@
+/* ==================================== */
+/* 1. CSS Reset & Variables (Responsive Foundation) */
+/* ==================================== */
+:root {
+    /* Màu chủ đạo tươi sáng (Teal) */
+    --primary-color: #1abc9c; 
+    
+    --overlay-color: rgba(255, 255, 255, 0.7); /* Lớp phủ cho Light Mode */
+    /* Màu nền & chữ mặc định (Light Mode) */
+    --background-color: #ffffff;
+    --text-color: #090909;
+    --card-background: #f8f8f8;
+    --secondary-color: #555555;
+    
+    /* Transition cho hiệu ứng mượt */
+    --transition-speed: 0.3s ease;
+
+    /* Thiết lập font */
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+}
+
+/* Dark Mode Variables */
+.dark-mode {
+    --overlay-color: rgba(44, 44, 44, 0.75); /* Lớp phủ cho Dark Mode */
+    --background-color: #1a1a1a;
+    --text-color: #ffffff;
+    --card-background: #2c2c2c;
+    --secondary-color: #cccccc;
+    --border-color: #444444;
+}
+
+/* CSS Reset Bắt buộc cho Responsive */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Quan trọng cho Responsive! */
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    /* background-color: var(--background-color); */ /* Fallback color */
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    /* Áp dụng ảnh nền toàn trang */
+    background-image: url('img/profile-backgroud.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+/* Typography cơ bản */
+h1, h2, h3 {
+    color: var(--text-color);
+    margin-bottom: 0.5em;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1.5em;
+    color: var(--primary-color);
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+}
+
+a:hover {
+    color: darken(var(--primary-color), 10%);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.section-padding {
+    padding: 60px 0;
+}
+
+.bg-alt {
+    /* Glassmorphism Effect */
+    background-color: var(--overlay-color);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px); /* Hỗ trợ Safari */
+}
+
+/* ==================================== */
+/* 2. HEADER & NAVIGATION (RESPONSIVE) */
+/* ==================================== */
+#main-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    /* Glassmorphism Effect */
+    background-color: var(--overlay-color);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px); /* Hỗ trợ Safari */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color var(--transition-speed);
+}
+
+.navbar-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color) !important;
+}
+
+#nav-links a {
+    margin-left: 1.5rem;
+    font-weight: 600;
+    padding: 5px 0;
+    position: relative;
+}
+
+#nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width var(--transition-speed);
+}
+
+#nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Hamburger Menu (Chỉ hiển thị trên Mobile) */
+#hamburger-menu {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+#hamburger-menu span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color);
+    margin: 4px 0;
+    transition: transform 0.4s;
+}
+
+/* Theme Toggle Button */
+#theme-toggle {
+    background: var(--card-background);
+    color: var(--text-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 5px;
+    padding: 8px 12px;
+    margin-left: 1rem;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+/* ==================================== */
+/* 3. HERO SECTION (CSS Grid Responsive) */
+/* ==================================== */
+#hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.hero-text h1 {
+    font-size: 3.5rem;
+    margin-bottom: 0;
+    color: #ffffff; /* Luôn là màu trắng để nổi bật trên nền */
+}
+
+.hero-text h2 {
+    font-size: 2rem;
+    color: #f0f0f0; /* Màu trắng ngà, nhẹ nhàng hơn */
+    margin-bottom: 1rem;
+    text-align: left; /* Ghi đè căn giữa mặc định */
+}
+
+.tagline {
+    font-size: 1.1rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    color: #f0f0f0; /* Đồng bộ màu trắng ngà */
+}
+
+.hero-text p:first-of-type {
+    color: #f0f0f0; /* Giữ nguyên màu trắng ngà */
+}
+
+.profile-picture {
+    width: 100%;
+    max-width: 350px; /* Giới hạn kích thước ảnh */
+    aspect-ratio: 3 / 4; /* Tỉ lệ 3:4 */
+    border-radius: 30%;
+    object-fit: cover; /* Đảm bảo ảnh không bị méo */
+    box-shadow: 0 10px 20px rgba(26, 188, 156, 0.4);
+    border: 5px solid var(--background-color);
+    margin: 0 auto; /* Tự động căn giữa trong grid layout */
+    display: block;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    border: 2px solid var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--primary-color);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 2px solid var(--secondary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* ==================================== */
+/* 4. SKILLS SECTION (Progress Bar Animation) */
+/* ==================================== */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.skill-card {
+    /* Glassmorphism Effect */
+    background-color: var(--overlay-color);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px); /* Hỗ trợ Safari */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform var(--transition-speed);
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar-container {
+    height: 10px;
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: var(--primary-color);
+    width: 0; /* Khởi tạo 0, JS sẽ set width theo data-skill-level */
+    transition: width 1s ease-out; /* Hiệu ứng đổ đầy */
+}
+
+/* --- Bố cục SO LE mới cho phần Kỹ năng --- */
+
+/* Trên màn hình lớn (desktop) */
+@media (min-width: 992px) {
+    .skills-grid {
+        display: grid;
+        /* Tạo một lưới 6 cột ảo để dễ dàng sắp xếp */
+        grid-template-columns: repeat(6, 1fr);
+        gap: 2rem;
+        align-items: start; /* Căn các item theo đầu cột */
+    }
+
+    /* --- Hàng trên (so le) --- */
+    /* Kỹ năng 1: Bắt đầu từ cột 1, rộng 3 cột */
+    .skills-grid .skill-card:nth-child(1) {
+        grid-column: 1 / span 3;
+    }
+    /* Kỹ năng 2: Bắt đầu từ cột 4, rộng 3 cột */
+    .skills-grid .skill-card:nth-child(2) {
+        grid-column: 4 / span 3;
+    }
+
+    /* --- Hàng dưới (so le) --- */
+    /* Kỹ năng 3: Bắt đầu từ cột 1, rộng 2 cột */
+    .skills-grid .skill-card:nth-child(3) {
+        grid-column: 1 / span 2;
+    }
+    /* Kỹ năng 4: Bắt đầu từ cột 3, rộng 2 cột (Tạo hiệu ứng so le ở giữa) */
+    .skills-grid .skill-card:nth-child(4) {
+        grid-column: 3 / span 2;
+    }
+    /* Kỹ năng 5: Bắt đầu từ cột 5, rộng 2 cột */
+    .skills-grid .skill-card:nth-child(5) {
+        grid-column: 5 / span 2;
+    }
+}
+
+
+
+/* ==================================== */
+/* 5. PROJECTS SECTION (CSS Grid & Hover Effect) */
+/* ==================================== */
+.project-filters {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.filter-btn {
+    background: var(--card-background);
+    border: 1px solid var(--secondary-color);
+    color: var(--text-color);
+    padding: 8px 15px;
+    margin: 5px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.projects-grid {
+    display: grid;
+    /* Responsive: 3 cột trên Desktop, 2 cột trên Tablet, 1 cột trên Mobile */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    /* Glassmorphism Effect */
+    background-color: var(--overlay-color);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px); /* Hỗ trợ Safari */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s ease-out;
+    cursor: pointer;
+    /* Thiết lập cho hiệu ứng hover 3D Tilt */
+    perspective: 1000px;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+}
+
+.project-image {
+    height: 200px;
+    background-color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.project-info {
+    padding: 15px;
+}
+
+.project-links a {
+    margin-right: 15px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* ==================================== */
+/* 6. CONTACT & FOOTER */
+/* ==================================== */
+.contact-flex {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+}
+
+.contact-form {
+    flex: 2;
+    /* Glassmorphism Effect */
+    background-color: var(--overlay-color);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px); /* Hỗ trợ Safari */
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid var(--secondary-color);
+    background: var(--background-color);
+    color: var(--text-color);
+    border-radius: 4px;
+    transition: border-color var(--transition-speed);
+}
+
+.contact-form input:focus, .contact-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.social-links {
+    flex: 1;
+}
+
+.social-links h3 {
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+    color: #f0f0f0; /* Luôn là màu sáng để dễ đọc trên nền */
+}
+
+.social-links a {
+    display: block;
+    padding: 8px 0;
+    color: #f0f0f0; /* Đổi màu link sang trắng ngà cho dễ đọc */
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid var(--secondary-color);
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+/* ==================================== */
+/* 7. MEDIA QUERIES (Responsive Magic) */
+/* ==================================== */
+
+/* Tablet (Màn hình dưới 992px) */
+@media (max-width: 992px) {
+    .hero-grid {
+        grid-template-columns: 1fr; /* Xếp chồng (stack) ảnh và chữ */
+        text-align: center;
+    }
+
+    .hero-image {
+        order: -1; /* Đẩy ảnh lên trên cùng */
+        margin-bottom: 2rem;
+    }
+    
+    .hero-text h1 {
+        font-size: 3rem;
+    }
+
+    .contact-flex {
+        flex-direction: column;
+    }
+    
+    .section-padding {
+        padding: 40px 0;
+    }
+}
+
+/* Mobile (Màn hình dưới 768px) */
+@media (max-width: 768px) {
+    /* Navbar Mobile: Ẩn menu links, hiện Hamburger */
+    #nav-links {
+        /* Thiết lập menu trượt từ phải sang (Mobile Overlay) */
+        position: fixed;
+        top: 0;
+        right: -100%; /* Ẩn menu */
+        height: 100vh;
+        width: 70%;
+        background-color: var(--card-background);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+        flex-direction: column;
+        padding-top: 80px;
+        transition: right 0.4s ease;
+    }
+
+    #nav-links.active {
+        right: 0; /* Hiện menu */
+        display: flex;
+        z-index: 999;
+    }
+    
+    #nav-links a {
+        margin: 10px 0;
+        padding: 15px 20px;
+        width: 100%;
+        border-bottom: 1px solid var(--border-color, #eee);
+    }
+    
+    #hamburger-menu {
+        display: block; /* Hiện Hamburger */
+    }
+    
+    /* Điều chỉnh Typography cho Mobile */
+    .hero-text h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-text h2 {
+        font-size: 1.5rem;
+    }
+    
+    /* Điều chỉnh Lưới Dự án cho Mobile */
+    .projects-grid {
+        grid-template-columns: 1fr; /* Chỉ 1 cột trên Mobile */
+    }
+    
+    /* Ẩn nút Dark Mode trên Mobile để làm gọn menu */
+    #theme-toggle {
+        display: none;
+    }
+}
+
+/* ==================================== */
+/* 8. SCROLL REVEAL ANIMATION           */
+/* ==================================== */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

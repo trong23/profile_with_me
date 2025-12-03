@@ -1,0 +1,26 @@
+[
+    {
+        "title": "Qu\u1ea3n l\u00fd Website (PHP\/MySQL)",
+        "description": "H\u1ec7 th\u1ed1ng CMS c\u00e1 nh\u00e2n h\u00f3a, c\u00f3 th\u1ec3 th\u00eam\/s\u1eeda\/x\u00f3a b\u00e0i vi\u1ebft, qu\u1ea3n l\u00fd ng\u01b0\u1eddi d\u00f9ng.",
+        "category": "fullstack",
+        "image_url": "assets\/img\/quan-ly-website.jpg",
+        "live_demo_url": "#",
+        "github_url": "#"
+    },
+    {
+        "title": "Landing Page T\u01b0\u01a1ng t\u00e1c (JS\/CSS)",
+        "description": "Trang \u0111\u00edch v\u1edbi c\u00e1c hi\u1ec7u \u1ee9ng cu\u1ed9n m\u01b0\u1ee3t, animations v\u00e0 responsive ho\u00e0n h\u1ea3o.",
+        "category": "fe",
+        "image_url": "assets\/img\/landing-page-tuong-tac.jpg",
+        "live_demo_url": "#",
+        "github_url": "#"
+    },
+    {
+        "title": "API Th\u1eddi ti\u1ebft (PHP\/cURL)",
+        "description": "X\u00e2y d\u1ef1ng m\u1ed9t API trung gian b\u1eb1ng PHP \u0111\u1ec3 l\u1ea5y v\u00e0 x\u1eed l\u00fd d\u1eef li\u1ec7u t\u1eeb b\u00ean th\u1ee9 ba.",
+        "category": "php",
+        "image_url": "assets\/img\/API-thoi-tiet.jpg",
+        "live_demo_url": "#",
+        "github_url": "#"
+    }
+]
