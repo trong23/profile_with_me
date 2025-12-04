@@ -94,20 +94,20 @@ if (isset($_SESSION['success_message'])) {
                         $row_class = $row['is_read'] == 0 ? 'unread-row' : '';
                 ?>
                     <tr class="<?php echo $row_class; ?>">
-                        <td><?php echo htmlspecialchars($row['name']); ?></td>
-                        <td><a href="mailto:<?php echo htmlspecialchars($row['email']); ?>"><?php echo htmlspecialchars($row['email']); ?></a></td>
-                        <td><?php echo nl2br(htmlspecialchars($row['message'])); ?></td>
-                        <td>
+                        <td data-label="Người gửi"><?php echo htmlspecialchars($row['name']); ?></td>
+                        <td data-label="Email"><a href="mailto:<?php echo htmlspecialchars($row['email']); ?>"><?php echo htmlspecialchars($row['email']); ?></a></td>
+                        <td data-label="Nội dung"><?php echo nl2br(htmlspecialchars($row['message'])); ?></td>
+                        <td data-label="Thời gian">
                             <?php 
                                 $date = new DateTime($row['received_at']);
                                 echo $date->format('d-m-Y H:i');
                             ?>
                         </td>
-                        <td class="action-links">
+                        <td data-label="Hành động" class="action-links">
                             <?php if ($row['is_read'] == 0): ?>
-                                <a href="admin_messages.php?action=mark_read&id=<?php echo $row['id']; ?>">Đánh dấu đã đọc</a>
+                                <a href="#" onclick="event.preventDefault(); document.getElementById('mark-read-form-<?php echo $row['id']; ?>').submit();">Đánh dấu đã đọc</a>
                             <?php endif; ?>
-                            <a href="admin_messages.php?action=delete&id=<?php echo $row['id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa tin nhắn này không?');">Xóa</a>
+                            <a href="#" onclick="if(confirm('Bạn có chắc chắn muốn xóa tin nhắn này không?')) { event.preventDefault(); document.getElementById('delete-form-<?php echo $row['id']; ?>').submit(); } else { event.preventDefault(); }">Xóa</a>
                         </td>
                     </tr>
                 <?php 

@@ -93,18 +93,18 @@ if (isset($_SESSION['success_message'])) {
                         while ($row = $result->fetch_assoc()):
                     ?>
                         <tr>
-                            <td><?php echo $row['id']; ?></td>
-                            <td><?php echo htmlspecialchars($row['title']); ?></td>
-                            <td><?php echo htmlspecialchars($row['category']); ?></td>
-                            <td>
+                            <td data-label="ID"><?php echo $row['id']; ?></td>
+                            <td data-label="Tiêu đề"><?php echo htmlspecialchars($row['title']); ?></td>
+                            <td data-label="Phân loại"><?php echo htmlspecialchars($row['category']); ?></td>
+                            <td data-label="Ảnh">
                                 <?php if (!empty($row['image_url'])): ?>
                                     <img src="<?php echo htmlspecialchars($row['image_url']); ?>" alt="Ảnh dự án">
                                 <?php endif; ?>
                             </td>
-                            <td><?php echo $row['display_order']; ?></td>
-                            <td class="action-links">
+                            <td data-label="Thứ tự"><?php echo $row['display_order']; ?></td>
+                            <td data-label="Hành động" class="action-links">
                                 <a href="admin_project_edit.php?id=<?php echo $row['id']; ?>">Sửa</a>
-                                <a href="admin_projects.php?action=delete&id=<?php echo $row['id']; ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa dự án này không?');">Xóa</a>
+                                <a href="#" onclick="event.preventDefault(); document.getElementById('delete-form-<?php echo $row['id']; ?>').submit();">Xóa</a>
                             </td>
                         </tr>
                     <?php 
