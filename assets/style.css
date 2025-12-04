@@ -52,6 +52,8 @@ body {
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: center center;
+    /* Thêm padding-top để nội dung không bị header che khuất */
+    padding-top: 60px;
 }
 
 /* Typography cơ bản */
@@ -103,8 +105,9 @@ a:hover {
 /* 2. HEADER & NAVIGATION (RESPONSIVE) */
 /* ==================================== */
 #main-header {
-    position: sticky;
+    position: fixed; /* Thay đổi: Luôn cố định ở đầu trang */
     top: 0;
+    width: 100%; /* Đảm bảo header chiếm toàn bộ chiều rộng */
     z-index: 1000;
     /* Glassmorphism Effect */
     background-color: var(--overlay-color);
@@ -164,7 +167,7 @@ a:hover {
     height: 3px;
     background-color: var(--text-color);
     margin: 4px 0;
-    transition: transform 0.4s;
+    transition: transform 0.4s, opacity 0.4s;
 }
 
 /* Theme Toggle Button */
@@ -464,12 +467,43 @@ a:hover {
     color: #f0f0f0; /* Đổi màu link sang trắng ngà cho dễ đọc */
 }
 
-footer {
+.main-footer {
     text-align: center;
     padding: 20px 0;
     border-top: 1px solid var(--secondary-color);
     font-size: 0.9rem;
     color: var(--secondary-color);
+}
+
+/* ==================================== */
+/* 8. SCROLL TO TOP BUTTON              */
+/* ==================================== */
+.scroll-to-top {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 45px;
+    height: 45px;
+    background-color: rgba(106, 105, 105, 0.5); /* Thay đổi: Nền xám mờ */
+    backdrop-filter: blur(4px); /* Thêm: Hiệu ứng kính mờ */
+    color: var(--primary-color); /* Thay đổi: Màu mũi tên theo màu chủ đạo */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px; /* Điều chỉnh kích thước icon */
+    text-decoration: none;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 /* ==================================== */
@@ -507,23 +541,19 @@ footer {
     #nav-links {
         /* Thiết lập menu trượt từ phải sang (Mobile Overlay) */
         position: fixed;
-        top: 0;
+        top: 60px; /* Thay đổi: Bắt đầu từ dưới header (header cao 60px) */
         right: -100%; /* Ẩn menu */
-        height: 100vh;
-        width: 70%;
+        height: auto; /* Thay đổi: Chiều cao tự động theo nội dung */
+        width: 280px; /* Thu hẹp chiều rộng cho gọn hơn */
+        max-width: 70%; /* Giới hạn chiều rộng tối đa */
         background-color: var(--card-background);
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
         flex-direction: column;
-        padding-top: 80px;
+        border-radius: 8px 0 0 8px; /* Thêm: Bo tròn góc cho menu mềm mại hơn */
+        padding: 20px 0; /* Thay đổi: Padding trên dưới, không padding trái phải */
         transition: right 0.4s ease;
     }
 
-    #nav-links.active {
-        right: 0; /* Hiện menu */
-        display: flex;
-        z-index: 999;
-    }
-    
     #nav-links a {
         margin: 10px 0;
         padding: 15px 20px;
@@ -550,13 +580,58 @@ footer {
     }
     
     /* Ẩn nút Dark Mode trên Mobile để làm gọn menu */
+    /* Thay đổi: Hiển thị lại nút theme và tạo kiểu cho nó trong menu */
     #theme-toggle {
-        display: none;
+        display: block;
+        margin: 20px auto 10px; /* Căn giữa và tạo khoảng cách */
+        width: fit-content;
+    }
+
+    /* --- Mobile Menu Overlay & Active State --- */
+    .menu-overlay {
+        position: fixed;
+        top: 60px; /* Thay đổi: Lớp phủ cũng bắt đầu từ dưới header */
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 998; /* Thấp hơn z-index của nav-links */
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    /* --- Trạng thái KHI MENU ĐƯỢC MỞ (body có class 'menu-active') --- */
+
+    /* 1. Hiện menu trượt từ phải vào */
+    body.menu-active #nav-links {
+        right: 0;
+        display: flex;
+        z-index: 999;
+    }
+
+    /* 2. Hiện lớp phủ mờ */
+    body.menu-active .menu-overlay {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* 3. Biến đổi hamburger thành dấu 'X' */
+    body.menu-active #hamburger-menu span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    body.menu-active #hamburger-menu span:nth-child(2) {
+        opacity: 0;
+    }
+
+    body.menu-active #hamburger-menu span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
     }
 }
 
 /* ==================================== */
-/* 8. SCROLL REVEAL ANIMATION           */
+/* 9. SCROLL REVEAL ANIMATION           */
 /* ==================================== */
 .reveal-on-scroll {
     opacity: 0;
